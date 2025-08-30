@@ -16,3 +16,11 @@ code {
   display: flex;
   justify-content: center;
 }
+
+.app-container{
+  .add-new{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
