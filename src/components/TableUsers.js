@@ -11,12 +11,13 @@ const TableUsers = (props) => {
 
  const getUser =  async() => {
    let res = await fetchAllUser();
+   
    if(res && res.data){
      setListUser(res.data)
    }
    
  }
-
+   // Customise
   return(
         <>
          <Table striped bordered hover size="sm">
