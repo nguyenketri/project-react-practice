@@ -24,9 +24,7 @@ const TableUsers = (props) => {
    let res = await fetchAllUser(page);
    
    if(res && res.data){
-   console.log(res)
     setListUser(res.data)
-  
    }
    
  }
@@ -122,6 +120,7 @@ const TableUsers = (props) => {
      show={showEdit}
      handleClose={()=>setShowEdit(false)}
      dataUserEdit={dataUserEdit}
+     getUser={getUser}
      />
      
         </>

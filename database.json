@@ -1,11 +1,9 @@
 {
   "users_page1": [
     {
-      "id": "1",
-      "email": "george.bluth@reqres.in",
       "first_name": "George",
-      "last_name": "Bluth",
-      "avatar": "https://reqres.in/img/faces/1-image.jpg"
+      "last_name": "Bluth5",
+      "id": "1"
     },
     {
       "id": "2",
@@ -45,11 +43,9 @@
   ],
   "users_page2": [
     {
-      "id": "7",
-      "email": "michael.lawson@reqres.in",
       "first_name": "Michael",
-      "last_name": "Lawson",
-      "avatar": "https://reqres.in/img/faces/7-image.jpg"
+      "last_name": "Lawson2",
+      "id": "7"
     },
     {
       "id": "8",
