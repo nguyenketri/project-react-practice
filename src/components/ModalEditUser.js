@@ -4,15 +4,15 @@ import { putUpdateUser } from '../services/User_Service';
 import { toast } from 'react-toastify';
 const ModalEditUser = (props) =>{
   
-const {show, handleClose,dataUserEdit,getUser} = props;
-const [name , setName] = useState("") 
+const {show, handleClose,dataUserEdit,getUser,page} = props;
+const [name , setName] = useState("")  
 const [job , setJob] = useState("")  
-   
+   console.log(">>check pag:",page)
 const handleEditUser = async() => {
-   let res = await putUpdateUser(name,job,dataUserEdit.id)
+   let res = await putUpdateUser(name,job,dataUserEdit.id,page)
    if(res){
     handleClose()
-    getUser(2)
+    getUser(page)
     toast.success("Update success")
 
    }

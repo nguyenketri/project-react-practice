@@ -6,6 +6,8 @@ import ReactPaginate from 'react-paginate'
 import '../App.scss'
 import ModalAddNew from './ModalAddNew';
 import ModalEditUser from './ModalEditUser'
+import { toast } from 'react-toastify'
+import { deleteUser } from '../services/User_Service'
 const TableUsers = (props) => {
    const [listUser, setListUser] = useState([])
    const [totalUser,setTotalUser] = useState(12)
@@ -49,6 +51,21 @@ const TableUsers = (props) => {
    setDataUserEdit(user)
    setShowEdit(true)
   }
+
+  const handleDelete =  async(item) => {
+  
+  let res = window.confirm("are you want to delete")
+   if(res){
+   
+    await deleteUser(item.id,page)
+    await getUser(page)
+    toast.success("Delete Success")
+   }else{
+    toast.info("Delete Cancelled")
+   }
+  ;
+  
+  }
   return(
         <>
         <div className='my-3 add-new'>
@@ -80,7 +97,9 @@ const TableUsers = (props) => {
             <button 
             onClick={() => hadleEditUser(item)}
             className='btn btn-warning mx-3'> Edit</button>
-            <button className='btn btn-danger '>Delete</button>
+            <button 
+            onClick={() => handleDelete(item)}
+            className='btn btn-danger '>Delete</button>
           </td>
           </tr>
               )
@@ -115,12 +134,14 @@ const TableUsers = (props) => {
       handleClose = {() => setShow(false)}
       handleUpdateTable={handleUpdateTable}
       id={listUser.length+1}
+      page={page}
      />
      <ModalEditUser
      show={showEdit}
      handleClose={()=>setShowEdit(false)}
      dataUserEdit={dataUserEdit}
      getUser={getUser}
+     page={page}
      />
      
         </>

@@ -9,24 +9,24 @@ const [name , setName] = useState("")
 const [job , setJob] = useState("")  
    
 const handleSave =  async() => {
-  //  let res = await postCreateUser(name,job,id)
-  //  console.log("check:",res)
-  //  if(res && res.data){
-  //   // success
-  //   handleClose()
-  //   setName("")
-  //   setJob("")
-  //   toast.success("User created Success")
-  //   handleUpdateTable()
-  //  }else{
-  //   //error
-  //   toast.error("Error")
-  //  }
-   handleUpdateTable({id:id,first_name:name,last_name:job})
-   handleClose()
-   setName("")
+   let res = await postCreateUser(name,job,id)
+   console.log("check:",res)
+   if(res){
+    // success
+    handleClose()
+    setName("")
     setJob("")
-   toast.success("User created Success")
+    toast.success("User created Success")
+    handleUpdateTable()
+   }else{
+    //error
+    toast.error("Error")
+   }
+  //  handleUpdateTable({id:id,first_name:name,last_name:job})
+  //  handleClose()
+  //  setName("")
+  //   setJob("")
+  //  toast.success("User created Success")
 }
   
   return (
