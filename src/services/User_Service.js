@@ -4,7 +4,11 @@ const fetchAllUser = (page) => {
   return  instance.get(`users_page${page}`);
 }
 
-const postCreateUser = (name,job) => {
-  return instance.post("users",{first_name:name,job:job})
+const postCreateUser = (name,job,id) => {
+  return instance.post("users_page1",{id:id,first_name:name,last_name:job})
 }
-export { fetchAllUser, postCreateUser};
+
+const putEditUser = (name,job,id)=>{
+  return instance.put(`users_page1/${id}`,{first_name:name,last_name:job})
+}
+export { fetchAllUser, postCreateUser,putEditUser};
