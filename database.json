@@ -34,39 +34,17 @@
       "avatar": "https://reqres.in/img/faces/5-image.jpg"
     },
     {
-      "id": "6",
-      "email": "tracey.ramos@reqres.in",
-      "first_name": "Tracey",
-      "last_name": "Ramos",
-      "avatar": "https://reqres.in/img/faces/6-image.jpg"
-    },
-    {
       "id": "7",
-      "first_name": "tri",
-      "last_name": "t1"
+      "first_name": "Trí",
+      "last_name": "Nguyễn Kế"
     },
     {
-      "id": "8",
-      "first_name": "tri",
-      "last_name": "t1"
-    },
-    {
-      "id": 9,
-      "first_name": "ngoc2",
-      "last_name": "12"
-    },
-    {
-      "id": 7,
+      "id": "6",
       "first_name": "ngoc2",
       "last_name": "222"
     }
   ],
   "users_page2": [
-    {
-      "first_name": "Michael22222",
-      "last_name": "Lawson22",
-      "id": "7"
-    },
     {
       "id": "8",
       "email": "lindsay.ferguson@reqres.in",

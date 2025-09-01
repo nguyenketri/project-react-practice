@@ -15,7 +15,7 @@ const {show,handleClose,handleDeleteForm,dataUserEdit,page} =props
     handleDeleteForm(dataUserEdit.id)
     toast.success("Delete Success")
     }else{
-        toast.error("Error")
+        toast.error("Error delete")
     }
     
   }

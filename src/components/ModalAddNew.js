@@ -10,7 +10,7 @@ const [job , setJob] = useState("")
    
 const handleSave =  async() => {
   
-   let res = await postCreateUser(name,job,id)
+   let res = await postCreateUser(name,job,String(id))
       if(res){
     // success
     handleClose()

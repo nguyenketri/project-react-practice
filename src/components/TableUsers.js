@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import { deleteUser } from '../services/User_Service'
 import _ from 'lodash'
 import ModalDeleteUser from './ModalDeleteUser'
+import './TableUser.scss'
 const TableUsers = (props) => {
    const [listUser, setListUser] = useState([])
    const [totalUser,setTotalUser] = useState(12)
@@ -20,7 +21,10 @@ const TableUsers = (props) => {
    const [showEdit, setShowEdit]= useState(false)
    const [dataUserEdit,setDataUserEdit] = useState({})
    const [showDelete,setShowDelete] = useState(false)
-    useEffect(() => {
+   
+   // sort
+   const[sortBy,setSortBy] = useState("asc")
+   useEffect(() => {
     // call API
     getUser(page)
     },[page])
@@ -84,9 +88,21 @@ const TableUsers = (props) => {
 
   // From Delete
   const handleDeleteForm = (id) => {
-    const ListUser2 = listUser.filter((item) => item.id !== id)
-    setListUser(ListUser2)
+    let ListUser2 = _.cloneDeep(listUser)
+     ListUser2 = ListUser2.filter((item) => item.id !== id)
+     setListUser(ListUser2)
   }
+
+  const [sortField, setSortField] = useState("id")
+  const handleSort = (sortBy,sortField) => {
+   setSortBy(sortBy)
+   setSortField(sortField)
+   let ListUser2 = _.cloneDeep(listUser)
+   ListUser2 = _.orderBy(ListUser2,[sortField],[sortBy]);
+   setListUser(ListUser2)
+  }
+
+  console.log("by",sortBy,"field:",sortField)
   return(
         <>
         <div className='my-3 add-new'>
@@ -96,11 +112,31 @@ const TableUsers = (props) => {
          <Table striped bordered hover size="sm">
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Email</th>
-          <th>first_name</th>
-          <th>last_name</th>
-          <th>Action</th>
+          <th >  
+            <div className='sort-header'>
+            <span>ID</span> 
+            <span><i 
+            onClick={() => handleSort("desc","id")}
+            className="fa-solid fa-arrow-down-long"></i>
+            <i 
+            onClick={() => handleSort("asc","id")}
+            className="fa-solid fa-arrow-up-long"></i></span>
+            </div>
+          </th>
+          <th >Email</th>
+          <th>
+            <div className='sort-header'>
+            <span>First_name</span> 
+            <span><i 
+            onClick={() => handleSort("desc","first_name")}
+            className="fa-solid fa-arrow-down-long"></i>
+            <i 
+            onClick={() => handleSort("asc","first_name")}
+            className="fa-solid fa-arrow-up-long"></i></span>
+           </div>
+            </th>
+          <th >last_name</th>
+          <th >Action</th>
         </tr>
       </thead>
       <tbody>
