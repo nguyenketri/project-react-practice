@@ -9,15 +9,16 @@ const [name , setName] = useState("")
 const [job , setJob] = useState("")  
    
 const handleSave =  async() => {
+  
    let res = await postCreateUser(name,job,id)
-   console.log("check:",res)
-   if(res){
+      if(res){
     // success
     handleClose()
     setName("")
     setJob("")
     toast.success("User created Success")
-    handleUpdateTable()
+    
+    handleUpdateTable({id:String(id),first_name:name,last_name:job})
    }else{
     //error
     toast.error("Error")
@@ -30,7 +31,10 @@ const handleSave =  async() => {
 }
   
   return (
-     <Modal show={show} onHide={handleClose}>
+     <Modal show={show} onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+     >
         <Modal.Header closeButton>
           <Modal.Title>Add New User</Modal.Title>
         </Modal.Header>

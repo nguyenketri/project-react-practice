@@ -8,6 +8,8 @@ import ModalAddNew from './ModalAddNew';
 import ModalEditUser from './ModalEditUser'
 import { toast } from 'react-toastify'
 import { deleteUser } from '../services/User_Service'
+import _ from 'lodash'
+import ModalDeleteUser from './ModalDeleteUser'
 const TableUsers = (props) => {
    const [listUser, setListUser] = useState([])
    const [totalUser,setTotalUser] = useState(12)
@@ -17,6 +19,7 @@ const TableUsers = (props) => {
    const [show, setShow]= useState(false)
    const [showEdit, setShowEdit]= useState(false)
    const [dataUserEdit,setDataUserEdit] = useState({})
+   const [showDelete,setShowDelete] = useState(false)
     useEffect(() => {
     // call API
     getUser(page)
@@ -52,19 +55,37 @@ const TableUsers = (props) => {
    setShowEdit(true)
   }
 
-  const handleDelete =  async(item) => {
-  
-  let res = window.confirm("are you want to delete")
-   if(res){
+  const handleDelete =  (user) => {
+  // async
+  // let res = window.confirm("are you want to delete")
+  //  if(res){
    
-    await deleteUser(item.id,page)
-    await getUser(page)
-    toast.success("Delete Success")
-   }else{
-    toast.info("Delete Cancelled")
-   }
-  ;
+  //   await deleteUser(item.id,page)
+  //   await getUser(page)
+  //   toast.success("Delete Success")
+  //  }else{
+  //   toast.info("Delete Cancelled")
+  //  }
+  // ;
+  setDataUserEdit(user)
+  setShowDelete(true)
   
+  }
+
+  // Form handleUpdate
+ 
+  const handleUpdateFrom = (user) => {
+     let listUser2 = _.cloneDeep(listUser)
+     let index2 = listUser.findIndex((item) => {return item.id === user.id}  )
+     listUser2[index2] = {id:user.id,first_name:user.first_name,last_name:user.last_name}
+     setListUser(listUser2)
+  }
+
+
+  // From Delete
+  const handleDeleteForm = (id) => {
+    const ListUser2 = listUser.filter((item) => item.id !== id)
+    setListUser(ListUser2)
   }
   return(
         <>
@@ -142,8 +163,16 @@ const TableUsers = (props) => {
      dataUserEdit={dataUserEdit}
      getUser={getUser}
      page={page}
+     handleUpdateFrom={handleUpdateFrom}
      />
      
+   <ModalDeleteUser
+   show={showDelete}
+   handleClose={() => setShowDelete(false)}
+   handleDeleteForm={handleDeleteForm}
+   dataUserEdit={dataUserEdit}
+   page={page}
+   />
         </>
     )
 } 

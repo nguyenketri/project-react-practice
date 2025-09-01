@@ -2,20 +2,26 @@ import { useEffect, useState } from 'react';
 import {Modal, Button} from 'react-bootstrap'
 import { putUpdateUser } from '../services/User_Service';
 import { toast } from 'react-toastify';
+import { last } from 'lodash';
 const ModalEditUser = (props) =>{
   
-const {show, handleClose,dataUserEdit,getUser,page} = props;
+const {show, handleClose,dataUserEdit,getUser,page,handleUpdateFrom} = props;
 const [name , setName] = useState("")  
 const [job , setJob] = useState("")  
    console.log(">>check pag:",page)
 const handleEditUser = async() => {
-   let res = await putUpdateUser(name,job,dataUserEdit.id,page)
-   if(res){
-    handleClose()
-    getUser(page)
-    toast.success("Update success")
+  //  let res = await putUpdateUser(name,job,dataUserEdit.id,page)
+  //  if(res){
+  //   handleClose()
+  //   getUser(page)
+  //   toast.success("Update success")
 
-   }
+  //  }
+ 
+  handleUpdateFrom({id:dataUserEdit.id,first_name:name,last_name:job})
+  handleClose()
+  toast.success("Edit success")
+     
 }
 
 useEffect(() => {
@@ -27,7 +33,10 @@ useEffect(() => {
 },[dataUserEdit])
 
   return (
-     <Modal show={show} onHide={handleClose}>
+     <Modal show={show} onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+     >
         <Modal.Header closeButton>
           <Modal.Title>Edit a User</Modal.Title>
         </Modal.Header>
