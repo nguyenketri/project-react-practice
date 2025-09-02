@@ -15,5 +15,9 @@ const putUpdateUser = (name,job,id,page)=>{
 const deleteUser = (id,page) => {
     return instance.delete("users_page"+page+"/"+id)
 }
+
+const loginApi = (email,password) => {
+   return instance.post("login",{email,password})
+}
 // `users_page2/${id}`
-export { fetchAllUser, postCreateUser, putUpdateUser,deleteUser};
+export { fetchAllUser, postCreateUser, putUpdateUser,deleteUser,loginApi};
