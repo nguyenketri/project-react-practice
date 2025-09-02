@@ -24,6 +24,8 @@ const TableUsers = (props) => {
    
    // sort
    const[sortBy,setSortBy] = useState("asc")
+   //search
+   const [keyword,setKeyWord] = useState("")
    useEffect(() => {
     // call API
     getUser(page)
@@ -103,11 +105,30 @@ const TableUsers = (props) => {
   }
 
   console.log("by",sortBy,"field:",sortField)
+
+  const handleSearch = (event) => {
+    let tar = event.target.value.toLowerCase()
+    if(tar){
+     let ListUser2 = _.cloneDeep(listUser)
+     ListUser2 = ListUser2.filter(item => item.email?.toLowerCase().includes(tar))
+    setListUser(ListUser2)
+    }else{
+      getUser(page)
+    }
+   
+  }
   return(
         <>
         <div className='my-3 add-new'>
           <span><b>List User:</b></span>
           <button className='btn btn-success' onClick={handleShow}>Add new User</button>
+        </div>
+        <div className='col-6 my-3'>
+          <input className='form-control'
+           placeholder='search user by email...'
+          //  value={keyword}
+           onChange={(event) => handleSearch(event)}
+           />
         </div>
          <Table striped bordered hover size="sm">
       <thead>
