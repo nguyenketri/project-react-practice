@@ -4,13 +4,17 @@ import { toast } from "react-toastify"
 const Login = () => {
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
-    const handleLogin = () => {
-    if(!email || !password){
+    
+    const handleLogin = async() => {
+     if(!email || !password){
         toast.error("Miss email or password")
         return
     }
-    let  res = loginApi(email,password)
+    let  res = await loginApi(email,password)
+    if(res && res.data && res.data.token){
+      localStorage.setItem("token",res.data.token)
     }
+  }
   return(
     <div className="login-container col-4">
         <div className="title">Login</div>
@@ -31,10 +35,10 @@ const Login = () => {
         onClick={handleLogin}
         >Login</button>
         <div className="go-back">
-          <i class="fa-solid fa-angle-left"></i>  <a href="#">Go Back</a> 
+          <i className="fa-solid fa-angle-left"></i>  <a href="#">Go Back</a> 
         </div>
     </div>
   )
-}
+    }
 
 export default Login

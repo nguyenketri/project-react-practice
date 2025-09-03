@@ -1,8 +1,15 @@
 import axios from "axios";
 const instance = axios.create({
-  // baseURL: 'https://jsonplaceholder.typicode.com',
   baseURL: 'http://localhost:9999/',
   
+});
+export const instance2 = axios.create({
+  // baseURL: 'https://jsonplaceholder.typicode.com',
+  // baseURL: 'http://localhost:9999/',
+  baseURL: 'https://reqres.in',
+  headers: {
+    'x-api-key': 'reqres-free-v1',
+  }
 });
 
 // Add a response interceptor
